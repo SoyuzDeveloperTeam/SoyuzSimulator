@@ -1,4 +1,6 @@
 #include "MM_H.h"
+#include <cmath>
+#include <math.h>
 ///////////////////////////////////////////////////////////
 // Вычисление ускорений, обусловленных притяжением Земли //
 ///////////////////////////////////////////////////////////
@@ -195,3 +197,64 @@ void HCSV()
 	TVect3 EverAlfa[8];
 	int MemAlpha;
 	double AlphaMom[2][4];
+
+void EerInit() {
+	StepRada[1] = 0.000000000000000000;
+	StepRada[2] = 0.056262560526922147;
+	StepRada[3] = 0.180240691736892365;
+	StepRada[4] = 0.352624717113169637;
+	StepRada[5] = 0.547153626330555383;
+	StepRada[6] = 0.734210177215410532;
+	StepRada[7] = 0.885320946839095768;
+	StepRada[8] = 0.977520613561287501;
+	DimCoefR[1] = 0.500000000000000000;
+	DimCoefR[2] = 0.166666666666666667;
+	DimCoefR[3] = 0.083333333333333333;
+	DimCoefR[4] = 0.050000000000000000;
+	DimCoefR[5] = 0.033333333333333333;
+	DimCoefR[6] = 0.023809523809523810;
+	DimCoefR[7] = 0.017857142857142857;
+	DimCoefR[8] = 0.013888888888888889;
+	DimCoefV[1] = 1.000000000000000000;
+	DimCoefV[2] = 0.500000000000000000;
+	DimCoefV[3] = 0.333333333333333333;
+	DimCoefV[4] = 0.250000000000000000;
+	DimCoefV[5] = 0.200000000000000000;
+	DimCoefV[6] = 0.166666666666666667;
+	DimCoefV[7] = 0.142857142857142857;
+	DimCoefV[8] = 0.125000000000000000;
+	CharSelF = 'A'; //all forces var from MM_H.h
+}
+
+void ECNullo() { //initial moment nullo to start
+	int i, j;
+	for(i=1; i<9; ++i)
+		for (j = 1; j < 9; ++j) {
+			CoefEver[i][j] = 0.0;
+			EverAlfa[i][j] = 0.0;
+		}
+	MemAlpha = 0;
+	for (i = 1; i < 2; ++i)
+		for (j = 1; j < 4; ++j)
+			AlphaMom[i][j] = 0.0;
+}
+
+int KeplerEqation(double ElmE, double MeanAnom) {
+	int iter, numitere;
+	double EccAnom;
+	double cura, difa;
+	double ECECE;
+	cura = MeanAnom + ElmE * sin(MeanAnom);
+	EccAnom = cura;
+	difa = 1.0;
+	iter = 0;
+	while ((difa>1.0e-15)and(iter<241))
+	{
+		EccAnom = cura - (cura - ElmE * sin(cura) - MeanAnom) / (1 - ElmE * cos(cura));
+		difa = abs(cura - EccAnom);
+		iter = iter + 1;
+	}
+	numitere = iter + 1;
+	ECECE = EccAnom;
+	return = ECECE;
+}
