@@ -1,4 +1,2 @@
-#SOYUZ-TMA SIMULATOR
-#СИМУЛЯТОР СОЮЗ-ТМА
-# soyusimulator
+# SOYUZ-TMA SIMULATOR
 Симулятор ТПК Союз-ТМА
