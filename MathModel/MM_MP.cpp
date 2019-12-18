@@ -1,12 +1,23 @@
-#include "MM_H.h"
-#include <cmath>
+//#include "MM_H.h"
+//#include <cmath>
 #include <math.h>
+
+
 ///////////////////////////////////////////////////////////
 // Вычисление ускорений, обусловленных притяжением Земли //
 ///////////////////////////////////////////////////////////
 
 //Числовые значения постоянных гравитационного поля Земли
 
+//начальные значения для геопотенциальных коэффициентов
+double czon[13];
+double ctes[78];
+double stes[78];
+
+char CharSelF; //to select forces
+
+typedef double TVect3[3];
+TVect3 TMatr33[3];
 /*
 Коэффициенты разложения гравитационного поля Земли 
 в ряд по сферическим гармоникам имеют числовые значения указанные в HCSV
@@ -14,8 +25,8 @@
 void HCSV() 
 {
 	czon[1]     = 0.0 ;
-	czon[2]     = -1.082636023e-03; //  2   0 -1082.63602298 
-	czon[3]     = +2.532435e-0;	 //  3   0     2.53243535 
+	czon[2]     = -1.082636023e-03;  //  2   0 -1082.63602298 
+	czon[3]     = +2.532435e-0;	     //  3   0     2.53243535 
 	czon[4]		= +1.619331e-06;	 //  4   0     1.61933121 
 	czon[5]		= +2.277161e-07;	 //  5   0     0.22771610 
 	czon[6]		= -5.396485e-07;	 //  6   0    -0.53964849 
@@ -251,10 +262,10 @@ int KeplerEqation(double ElmE, double MeanAnom) {
 	while ((difa>1.0e-15)and(iter<241))
 	{
 		EccAnom = cura - (cura - ElmE * sin(cura) - MeanAnom) / (1 - ElmE * cos(cura));
-		difa = abs(cura - EccAnom);
+		difa = fabs(cura - EccAnom);
 		iter = iter + 1;
 	}
 	numitere = iter + 1;
 	ECECE = EccAnom;
-	return = ECECE;
+	return  ECECE;
 }

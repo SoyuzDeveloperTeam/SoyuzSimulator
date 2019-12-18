@@ -1,14 +1,16 @@
 ﻿#include <iostream>
-#include "MM_H.h"
 #include <math.h>
 #include <cmath>
 #include <ctime>
 #include <string>
 #include <iomanip>
 #include <stdio.h>
+#include "MM_H.h"
 
 #define DEBUG_MODE  //Debug mode only for developers
 #define UDP_CONNECT //Обмен по Ethernet
+
+extern double Delta_D, m2, m3, u;
 
 ////////////////////////
 // УРАВНЕНИЯ ДВИЖЕНИЯ //
@@ -138,7 +140,7 @@ void EnterNU() {
 	std::cin >> om1;
 	std::cout << "Наклонение ";
 	std::cin >> i1;
-	std::cout << "Аргумент широты перегея ";
+	std::cout << "Аргумент перицентра ";
 	std::cin >> sig1;
 	std::cout << "Истиная аномалия ";
 	std::cin >> fi1;
@@ -148,7 +150,7 @@ void EnterNU() {
 	std::cin >> massTK;
 	std::cout << "Час начала режима ";
 	std::cin >> hour_m;
-	std::cout << "минуты начала режима";
+	std::cout << "Минуты начала режима ";
 	std::cin >> min_m;
 	std::cout << "Секунды начала режима ";
 	std::cin >> sec_m;
@@ -165,12 +167,7 @@ void EnterNU() {
 
 void ControlDyn() {
 	setlocale(LC_ALL, "Russian");
-	std::cout << "Время " << hour_m << ":" << min_m << ":" << sec_m << "      " << "Дата " << ddn << "." << mmn << "." << yyn << "\n";
-	std::cout << "--------------------------------------------------------------------------------------\n";
-	std::cout << "   Центр масс в J2000         Кватернион ССК РС\n";
-	std::cout << " X   "<< std::setw(7) << "             " << "0.000000" << "\n";
-	std::cout << " Y   " << "0.000000" << "             " << "0.000000" << "\n";
-	std::cout << " Z   " << "0.000000" << "             " << "0.000000" << "\n";
+    // Отображение инструкорского формата 
 }
 
 #endif // DEBUG_MODE
@@ -214,15 +211,19 @@ void intro()
 	system("cls");
 	std::cout << "F = " << F_out;
 	std::cout << "\n";
-	
 }
 
+void Connect() {
+	setlocale(LC_ALL, "Russian");
+	std::cout << "БММ - SS";
+	std::cout << "Установка соеденения... ";
+	// конектимся к МиУ, посылаем квитанцию, если ответ верный, то
+	std::cout << "OK";
+}
 
 int main()
 {
-	int Start = clock();
 	system("cls");
-	OrbSpeed(320);
 #ifdef DEBUG_MODE
 	EnterNU(); //Вводим НУ
 	StartM();
