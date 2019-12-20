@@ -46,4 +46,7 @@
     <Text Include="README.txt" />
     <Text Include="_ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="input_data.fnu" />
+  </ItemGroup>
 </Project>

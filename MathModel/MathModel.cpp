@@ -11,6 +11,8 @@
 #include <functional>
 #include <fstream>
 #include <cstring>
+#include <iomanip>
+#include <cstdlib>
 using namespace std;
 
 int LANG;
@@ -152,11 +154,6 @@ void ncos(double alpha, double betta, double gamma, double x, double y, double z
 
 #ifdef DEBUG_MODE
 
-void change_model_type() {
-	setlocale(LC_ALL, "Russian");
-	system("cls");
-	std::cout << "Выберете режим работы: ";
-}
 	const char* arr_data_nameE[]{ 
 	"Hour                  ","Minutes               ","Seconds               ","Day                   ",
 	"Month                 ","Year                  ","Semimajor axis        ","Eccentricity          ",
@@ -194,7 +191,51 @@ void StartModel() {
 	cout << "Model Process... ";
 }
 
+void startmodel_with_VM() {
+	system("cls");
+	int i;
+	char a = 8;
+	cout << "*------------------------------------------------------------------"<<"\n";
+	cout << "|Дата  "<<setw(2)<<ddn<<"-"<<mmn<<"--"<<setw(4)<<yyn << "                    Вектор на солнце        " <<"\n";
+	cout << "|Время "<< setw(2) << hour_m << ":" << min_m << ":" << sec_m << "                     X " <<"\n";
+	cout << "|                                   Y" << "\n";
+	cout << "|                                   Z" << "\n";
+	cout << "*----------------------------------------------------------------------------------------------" << "\n";
+	cout << "|" << "\n";
+	cout << "|  Центр масс в J2000         Центр масс в РС               Кватернион ССК РС" << "\n";
+	cout << "| X    " << fixed << r1x1 << "          X   "<< r1x1 << "             " << L0 << "             |" <<"\n";
+	cout << "| Y    " << fixed << r1y1 << "          Y   "<< r1y1 << "             " << L1 << "\n";
+	cout << "| Z    " << fixed << r1z1 << "          Z   "<< r1z1 << "             " << L2 << "\n";
+	cout << "|                                                 "<< L3 << "\n";
+	cout << "|  Скорость ц.м. в J2000             Угловая скорость в J2000" << "\n";
+	cout << "| X    " << fixed << v1x1 << "          X   "<< WxTK << "\n";
+	cout << "| Y    " << fixed << v1y1 << "          Y   "<< WyTK << "\n";
+	cout << "| Z    " << fixed << v1z1 << "          Z   "<< WzTK << "\n";
+	cout << "| "<<"\n";
+	cout << "*----------------------------------------------------------------------\n";
+	cout << "|            Моменты инерции                "<<"\n";
+	cout << "|      X                 Y                 Z"<<"\n";
+	cout << "| X    " << fixed << j_j1_mas[0] << "    " << j_j1_mas[1] << "    " << j_j1_mas[3] << "\n";
+	cout << "| X    " << fixed << j_j1_mas[4] << "    " << j_j1_mas[5] << "    " << j_j1_mas[6] <<"\n";
+	cout << "| X    " << fixed << j_j1_mas[7] << "    " << j_j1_mas[8] << "    " << j_j1_mas[9] <<"\n";
+	cout << "*----------------------------------------------------------------------" << "\n";
+	cin >> i;
+	//line("╔", "═", "╦", "╗", 6, 6);
+}
+
 //\\//\\//\\//\\//\\
+
+void change_model_type() {
+	int i;
+	setlocale(LC_ALL, "Russian");
+	system("cls");
+	cout << "Выберете режим работы: \n";
+	cout << "1. Пуск модели по НУ \n";
+	cout << "2. Дополнительные параметры \n";
+	cin >> i;
+	if (i == 1)
+		startmodel_with_VM();
+}
 
 void Connect() { // Установка соединения с МиУ
 	setlocale(LC_ALL, "Russian");
@@ -270,7 +311,7 @@ int main()
 	int br;
 	int i;
 	std::ifstream FNU; //Переменная файла НУ
-	FNU.open("C:\\input_data.nuf", std::ifstream::in);
+	FNU.open("input_data.fnu", std::ifstream::in);
 	if (!FNU) { 
 		if (LANG == 1)
 			std::cout << "File not found!";
@@ -301,7 +342,9 @@ int main()
 		std::cin >> chek[0];
 		if (chek[0] == 'Y' or 'y') {
 			UNPACK_FF(); //Присваиваем из массива
-			std::cout << "ddd";
+			//FNU.close;
+			change_model_type();
+
 		}
 		if (chek[0] == 'N' or 'n') {
 			return 0;

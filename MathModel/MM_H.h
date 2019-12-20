@@ -35,6 +35,8 @@ Z_TK;
 	double  cm1y;
 	double  cm1z;
 
+	double WxTK, WyTK, WzTK;
+
 	double TK_DATA_MAS[15];
 	double DOS_DATA_MAS[15];
 
