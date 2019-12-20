@@ -30,6 +30,9 @@
     <ClCompile Include="MM_MD.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="DEFINE.h">
+      <Filter>Исходные файлы\Файлы заголовков</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MM_H.h">

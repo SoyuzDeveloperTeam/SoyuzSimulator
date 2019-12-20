@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DEFINE.h" />
     <ClCompile Include="MathModel.cpp" />
     <ClCompile Include="MM_MD.cpp" />
     <ClCompile Include="MM_MJD.cpp" />

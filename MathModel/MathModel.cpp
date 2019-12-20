@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿#include "DEFINE.h"
+#include <iostream>
 #include <math.h>
 #include <cmath>
 #include <ctime>
@@ -29,8 +30,7 @@ void SELECT_LANG(){
 
 //#include "MM_MD.cpp"
 
-#define DEBUG_MODE  //Debug mode only for developers
-//#define RELEASE_MODE
+
 
 #ifdef RELEASE_MODE
 #define UDP_CONNECT //Обмен по Ethernet
